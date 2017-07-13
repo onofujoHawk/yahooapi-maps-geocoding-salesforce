@@ -1,0 +1,62 @@
+<!--
+	YahooAPIsRestPage.page
+
+	@author Onofrio Falco
+	@date May 2017
+	@description REST API Visualforce page
+-->
+<apex:page showHeader="true" 
+	sidebar="true" 
+	controller="YahooAPIsRestController"
+	tabStyle="Contact"
+	cache="true"
+	expires="30">
+
+	<apex:sectionHeader title="Yahoo Maps Geocoding" subtitle="REST Demo (XML)" />
+
+	<apex:form >
+		<apex:pageMessages escape="true" id="messages"/>
+
+		<apex:pageBlock >
+			<apex:pageBlockButtons location="bottom">
+				<apex:commandButton action="{!submit}" value="Submit" rerender="resultsPanel, messages" 
+				status="status" />
+			</apex:pageBlockButtons>
+
+			This example calls Yahoo! Map geocoding REST service with the address you provide below.<p/>
+
+			<!-- address -->
+			<apex:pageBlockSection >
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel for="address">Address</apex:outputLabel>
+					<apex:inputText id="address" value="{!address}" />
+				</apex:pageBlockSectionItem>
+			</apex:pageBlockSection>
+					
+			<!-- city -->
+			<apex:pageBlockSection >
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel for="city">City</apex:outputLabel>
+					<apex:inputText id="city" value="{!city}" />
+				</apex:pageBlockSectionItem>
+			</apex:pageBlockSection>
+
+			<!-- state -->
+			<apex:pageBlockSection >
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel for="state">State</apex:outputLabel>
+					<apex:inputText id="state" value="{!state}" />
+				</apex:pageBlockSectionItem>
+			</apex:pageBlockSection><br/>
+
+			<!-- action status -->
+			<apex:actionStatus id="status" startText="Fetching map..." />
+			<!-- result -->
+			<apex:outputPanel id="resultsPanel">
+				<apex:outputText value="{!geoAddress}" />
+			</apex:outputPanel>
+		</apex:pageBlock>
+
+	</apex:form>
+	
+</apex:page>
